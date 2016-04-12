@@ -5,7 +5,7 @@ TARGET_USES_QCOM_BSP := true
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 TARGET_USES_NQ_NFC := true
-
+TARGET_KERNEL_VERSION := 3.18
 #QTIC flag
 -include $(QCPATH)/common/config/qtic-config.mk
 
@@ -18,7 +18,8 @@ PRODUCT_COPY_FILES += device/qcom/msm8937_32/media/media_profiles_8937.xml:syste
                       device/qcom/msm8937_32/media/media_codecs_performance_8937.xml:system/etc/media_codecs_performance.xml
 endif
 
-PRODUCT_COPY_FILES += device/qcom/msm8937_32/whitelistedapps.xml:system/etc/whitelistedapps.xml
+PRODUCT_COPY_FILES += device/qcom/msm8937_32/whitelistedapps.xml:system/etc/whitelistedapps.xml \
+                      device/qcom/msm8937_32/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
        dalvik.vm.heapminfree=6m \
@@ -148,6 +149,7 @@ PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN t
 # Add the overlay path
 ifeq ($(strip $(TARGET_USES_QTIC)),true)
 PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res-overlay \
+        $(QCPATH)/qrdplus/globalization/multi-language/res-overlay \
         $(PRODUCT_PACKAGE_OVERLAYS)
 endif
 
