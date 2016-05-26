@@ -5,7 +5,6 @@ TARGET_USES_QCOM_BSP := true
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 TARGET_USES_NQ_NFC := false
-TARGET_USES_QTIC := false
 TARGET_KERNEL_VERSION := 3.18
 #QTIC flag
 -include $(QCPATH)/common/config/qtic-config.mk
@@ -34,14 +33,13 @@ $(call inherit-product, device/qcom/common/common.mk)
 PRODUCT_NAME := msm8937_32
 PRODUCT_DEVICE := msm8937_32
 
-ifeq ($(strip $(TARGET_USES_QTIC)),true)
+# When can normal compile this module, need module owner enable below commands
 # font rendering engine feature switch
--include $(QCPATH)/common/config/rendering-engine.mk
-ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
-    MULTI_LANG_ENGINE := REVERIE
+#-include $(QCPATH)/common/config/rendering-engine.mk
+#ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
+#    MULTI_LANG_ENGINE := REVERIE
 #   MULTI_LANG_ZAWGYI := REVERIE
-endif
-endif
+#endif
 
 #PRODUCT_BOOT_JARS += qcmediaplayer \
                      vcard \
@@ -114,12 +112,12 @@ antradio_app
 PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN ta_IN te_IN zh_HK \
         in_ID my_MM km_KH sw_KE uk_UA pl_PL sr_RS sl_SI fa_IR kn_IN ml_IN ur_IN gu_IN or_IN
 
+
+# When can normal compile this module,  need module owner enable below commands
 # Add the overlay path
-ifeq ($(strip $(TARGET_USES_QTIC)),true)
-PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res-overlay \
-        $(QCPATH)/qrdplus/globalization/multi-language/res-overlay \
-        $(PRODUCT_PACKAGE_OVERLAYS)
-endif
+#PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
+#        $(QCPATH)/qrdplus/globalization/multi-language/res-overlay \
+#        $(PRODUCT_PACKAGE_OVERLAYS)
 
 # Sensor HAL conf file
 PRODUCT_COPY_FILES += \
