@@ -44,7 +44,6 @@ endif
 #PRODUCT_BOOT_JARS += vcard \
                      com.qti.dpmframework
 PRODUCT_BOOT_JARS += qcom.fmradio
-PRODUCT_BOOT_JARS += qcmediaplayer
 ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += WfdCommon
     PRODUCT_BOOT_JARS += oem-services
