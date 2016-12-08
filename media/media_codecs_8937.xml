@@ -151,9 +151,7 @@ Only the three quirks included above are recognized at this point:
     </Encoders>
     <Decoders>
         <!-- Audio Software  -->
-        <MediaCodec name="OMX.qti.audio.decoder.flac" type="audio/flac" >
-            <Limit name="concurrent-instances" max="10" />
-        </MediaCodec>
+        <MediaCodec name="OMX.qti.audio.decoder.flac" type="audio/flac" />
         <!-- Video Hardware  -->
         <MediaCodec name="OMX.qcom.video.decoder.avc" type="video/avc" >
             <Quirk name="requires-allocate-on-input-ports" />
