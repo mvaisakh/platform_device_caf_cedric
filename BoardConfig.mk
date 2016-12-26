@@ -132,7 +132,7 @@ TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 TARGET_USES_SSC := true
 
 #Enabling IMS Feature
-TARGET_USES_IMS := TRUE
+TARGET_USES_IMS := true
 
 #PCI RCS
 TARGET_USES_PCI_RCS := false
