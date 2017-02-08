@@ -1,16 +1,21 @@
+TARGET_USES_AOSP := true
+TARGET_USES_QCOM_BSP := false
+
+ifeq ($(TARGET_USES_AOSP),true)
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
+TARGET_USES_QTIC := false
+else
 DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8937_32/overlay
-
-TARGET_USES_QCOM_BSP := true
-
-# Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-TARGET_USES_NQ_NFC := true
-TARGET_KERNEL_VERSION := 3.18
-#QTIC flag
+TARGET_USES_QTIC := true
 -include $(QCPATH)/common/config/qtic-config.mk
+endif
+
+TARGET_USES_NQ_NFC := false
+TARGET_KERNEL_VERSION := 3.18
 
 # Enable features in video HAL that can compile only on this platform
-TARGET_USES_MEDIA_EXTENSIONS := true
+TARGET_USES_MEDIA_EXTENSIONS := false
 
 # media_profiles and media_codecs xmls for msm8937
 ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
@@ -43,12 +48,12 @@ endif
 
 #PRODUCT_BOOT_JARS += vcard \
                      com.qti.dpmframework
-PRODUCT_BOOT_JARS += qcom.fmradio
-PRODUCT_BOOT_JARS += qcmediaplayer
+#PRODUCT_BOOT_JARS += qcom.fmradio
+#PRODUCT_BOOT_JARS += qcmediaplayer
 ifneq ($(strip $(QCPATH)),)
-    PRODUCT_BOOT_JARS += WfdCommon
+#    PRODUCT_BOOT_JARS += WfdCommon
     PRODUCT_BOOT_JARS += oem-services
-    PRODUCT_BOOT_JARS += tcmiface
+#    PRODUCT_BOOT_JARS += tcmiface
 #    PRODUCT_BOOT_JARS += dpmapi
 #    PRODUCT_BOOT_JARS += com.qti.location.sdk
 endif
@@ -109,7 +114,7 @@ libantradio \
 antradio_app
 
 PRODUCT_PACKAGES += telephony-ext
-PRODUCT_BOOT_JARS += telephony-ext
+#PRODUCT_BOOT_JARS += telephony-ext
 
 # Defined the locales
 PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN ta_IN te_IN zh_HK \
@@ -121,7 +126,7 @@ PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN t
 #PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
 #        $(QCPATH)/qrdplus/globalization/multi-language/res-overlay \
 #        $(PRODUCT_PACKAGE_OVERLAYS)
-PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
+#PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
         $(PRODUCT_PACKAGE_OVERLAYS)
 
 #for android_filesystem_config.h
@@ -148,3 +153,6 @@ else
     PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
         ro.logdumpd.enabled=0
 endif
+
+#Keymaster
+PRODUCT_PACKAGES += android.hardware.keymaster@3.0-impl

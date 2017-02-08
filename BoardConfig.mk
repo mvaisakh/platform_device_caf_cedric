@@ -42,8 +42,8 @@ BOOTLOADER_PLATFORM := msm8952# use 8952 LK configuration
 # Enables CSVT
 TARGET_USES_CSVT := true
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+#TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+#TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI  := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
@@ -82,7 +82,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 #TARGET_USES_AOSP := true
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000 androidboot.selinux=permissive
 
 BOARD_SECCOMP_POLICY := device/qcom/msm8937_32/seccomp
 
@@ -108,7 +108,6 @@ ADD_RADIO_FILES ?= true
 PROTOBUF_SUPPORTED := false
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API :=true
-TARGET_USES_QCOM_BSP := true
 
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_msm
 TARGET_INIT_VENDOR_LIB := libinit_msm
@@ -124,21 +123,28 @@ TARGET_BOARD_SUFFIX := _32
 #MALLOC_IMPL := dlmalloc
 MALLOC_SVELTE := true
 
+ifeq ($(TARGET_USES_AOSP), true)
+TARGET_HW_DISK_ENCRYPTION := false
+else
+# SDClang configuration
+SDCLANG := true
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := true
+endif
+
 TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 
 #Enable SSC Feature
 TARGET_USES_SSC := true
 
 #Enabling IMS Feature
-TARGET_USES_IMS := TRUE
+TARGET_USES_IMS := false
 
 #PCI RCS
 TARGET_USES_PCI_RCS := false
 
 # Enable sensor multi HAL
-USE_SENSOR_MULTI_HAL := true
+#USE_SENSOR_MULTI_HAL := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
