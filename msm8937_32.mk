@@ -27,6 +27,13 @@ PRODUCT_COPY_FILES += device/qcom/msm8937_32/media/media_profiles_8937.xml:syste
                       device/qcom/msm8937_32/media/media_codecs_8956.xml:system/etc/media_codecs_8956.xml \
                       device/qcom/msm8937_32/media/media_codecs_performance_8937.xml:system/etc/media_codecs_performance.xml
 endif
+# video seccomp policy files
+# copy to system/vendor as well (since some devices may symlink to system/vendor and not create an actual partition for vendor)
+PRODUCT_COPY_FILES += \
+    device/qcom/msm8937_32/seccomp/mediacodec-seccomp.policy:vendor/etc/seccomp_policy/mediacodec.policy \
+    device/qcom/msm8937_32/seccomp/mediaextractor-seccomp.policy:vendor/etc/seccomp_policy/mediaextractor.policy \
+    device/qcom/msm8937_32/seccomp/mediacodec-seccomp.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    device/qcom/msm8937_32/seccomp/mediaextractor-seccomp.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
 
 PRODUCT_COPY_FILES += device/qcom/msm8937_32/whitelistedapps.xml:system/etc/whitelistedapps.xml \
                       device/qcom/msm8937_32/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
