@@ -149,6 +149,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
      device/qcom/msm8937_32/sensors/hals.conf:system/etc/sensors/hals.conf
 
+# Camera configuration file. Shared by passthrough/binderized camera HAL
+PRODUCT_PACKAGES += camera.device@3.2-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+# Enable binderized camera HAL
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
+
 PRODUCT_SUPPORTS_VERITY := true
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
 
