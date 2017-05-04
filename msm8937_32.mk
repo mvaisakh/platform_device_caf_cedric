@@ -76,6 +76,8 @@ endif
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
 
+PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
+
 # ANT+ stack
 PRODUCT_PACKAGES += \
     AntHalService \
