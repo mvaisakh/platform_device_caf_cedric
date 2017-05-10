@@ -150,7 +150,7 @@ TARGET_USES_IMS := false
 TARGET_USES_PCI_RCS := false
 
 # Enable sensor multi HAL
-#USE_SENSOR_MULTI_HAL := true
+USE_SENSOR_MULTI_HAL := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
