@@ -147,6 +147,12 @@ PRODUCT_PACKAGES += \
     wpa_supplicant_overlay.conf \
     p2p_supplicant_overlay.conf
 
+
+#for wlan
+PRODUCT_PACKAGES += \
+    wificond \
+    wifilogd
+
 PRODUCT_PACKAGES += telephony-ext
 PRODUCT_BOOT_JARS += telephony-ext
 
