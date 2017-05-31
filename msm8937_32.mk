@@ -71,7 +71,7 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8937_32/vintf.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 ifneq ($(strip $(QCPATH)),)
-#    PRODUCT_BOOT_JARS += WfdCommon
+    PRODUCT_BOOT_JARS += WfdCommon
     PRODUCT_BOOT_JARS += oem-services
     PRODUCT_BOOT_JARS += tcmiface
 #    PRODUCT_BOOT_JARS += dpmapi
