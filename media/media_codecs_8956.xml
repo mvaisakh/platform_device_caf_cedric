@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright (C) 2012 The Android Open Source Project
-     Copyright (C) 2014 The Linux Foundation. All rights reserved.
+     Copyright (C) 2014-2017 The Linux Foundation. All rights reserved.
      Not a contribution.
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -187,7 +187,9 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.qcom.audio.decoder.evrc" type="audio/evrc" >
             <Quirk name="requires-global-flush" />
         </MediaCodec>
-        <MediaCodec name="OMX.qti.audio.decoder.flac" type="audio/flac" />
+        <MediaCodec name="OMX.qti.audio.decoder.flac" type="audio/flac" >
+            <Limit name="concurrent-instances" max="10" />
+        </MediaCodec>
         <!-- Video Hardware  -->
         <MediaCodec name="OMX.qcom.video.decoder.avc" type="video/avc" >
             <Quirk name="requires-allocate-on-input-ports" />
