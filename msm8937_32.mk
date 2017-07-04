@@ -17,6 +17,8 @@ endif
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
 #TARGET_USES_QTIC := false
 endif
+
+BOARD_HAVE_QCOM_FM := true
 TARGET_USES_NQ_NFC := false
 TARGET_KERNEL_VERSION := 3.18
 
@@ -64,7 +66,7 @@ endif
 
 #PRODUCT_BOOT_JARS += vcard \
                      com.qti.dpmframework
-#PRODUCT_BOOT_JARS += qcom.fmradio
+PRODUCT_BOOT_JARS += qcom.fmradio
 
 # add vendor manifest file
 PRODUCT_COPY_FILES += \
