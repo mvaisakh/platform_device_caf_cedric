@@ -223,7 +223,7 @@ on charger
     setprop persist.sys.usb.config mass_storage
     start hvdcp_opti
 
-service imsstarter /system/bin/sh /vendor/bin/init.qti.ims.sh
+service imsstarter /vendor/bin/init.qti.ims.sh
     class main
     oneshot
 
