@@ -183,6 +183,9 @@ debug.enable.gamed=0
 #property to enable narrow search range for video encoding
 vidc.enc.narrow.searchrange=1
 
+#property to disable split mode
+vidc.disable.split.mode=ture
+
 #property to enable fingerprint
 persist.qfp=false
 
