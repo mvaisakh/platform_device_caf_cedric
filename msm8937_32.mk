@@ -50,6 +50,9 @@ PRODUCT_COPY_FILES += device/qcom/msm8937_32/whitelistedapps.xml:system/etc/whit
                       device/qcom/msm8937_32/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.vidc.disable.split.mode=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
        dalvik.vm.heapminfree=6m \
        dalvik.vm.heapstartsize=14m
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
