@@ -21,7 +21,7 @@ BOARD_HAVE_QCOM_FM := true
 # Default A/B configuration.
 ENABLE_AB ?= false
 
-TARGET_USES_NQ_NFC := false
+TARGET_USES_NQ_NFC := true
 TARGET_KERNEL_VERSION := 3.18
 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
