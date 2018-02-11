@@ -27,23 +27,15 @@ BOARD_USES_GENERIC_AUDIO := true
 -include $(QCPATH)/common/msm8937_32/BoardConfigVendor.mk
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_APPEND_DTB := true
-#TODO: Fix-me: Setting TARGET_HAVE_HDMI_OUT to false
-# to get rid of compilation error.
-TARGET_HAVE_HDMI_OUT := false
 TARGET_USES_OVERLAY := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_NO_BOOTLOADER := false
 TARGET_NO_KERNEL := false
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_RPC := true
-BOOTLOADER_GCC_VERSION := arm-eabi-4.8
-BOOTLOADER_PLATFORM := msm8952# use 8952 LK configuration
 
 # Enables CSVT
 TARGET_USES_CSVT := true
 
-#TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-#TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI  := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
@@ -53,8 +45,6 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_HARDWARE_3D := false
 TARGET_BOARD_PLATFORM := msm8937
-# This value will be shown on fastboot menu
-TARGET_BOOTLOADER_BOARD_NAME := QC_Reference_Phone
 
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
@@ -62,8 +52,6 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 TARGET_USES_UNCOMPRESSED_KERNEL := false
 USE_CLANG_PLATFORM_BUILD := true
-# Enables Adreno RS driver
-#OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -74,9 +62,6 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # binaries. Decrease the size if RAM or Flash Storage size is a limitation
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
-
-# Use signed boot and recovery image
-#TARGET_BOOTIMG_SIGNED := true
 
 ifeq ($(ENABLE_AB), true)
 # A/B related defines
@@ -136,9 +121,6 @@ BOARD_EGL_CFG := device/qcom/msm8937_32/egl.cfg
 # Enable suspend during charger mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
-
-# Add NON-HLOS files for ota upgrade
-ADD_RADIO_FILES ?= true
 
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := false
