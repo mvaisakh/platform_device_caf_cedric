@@ -1,185 +1,189 @@
-# Copyright (C) 2011 The Android Open-Source Project
+#
+# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The PolyOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# config.mk
-#
-# Product-specific compile-time definitions.
-#
 
-ifeq ($(TARGET_ARCH),)
-TARGET_ARCH := arm
-endif
-
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(PWD)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-
-BOARD_USES_GENERIC_AUDIO := true
-
+-include vendor/motorola/cedric/BoardConfigVendor.mk
 -include $(QCPATH)/common/msm8937_32/BoardConfigVendor.mk
-TARGET_COMPILE_WITH_MSM_KERNEL := true
-TARGET_KERNEL_APPEND_DTB := true
-TARGET_USES_OVERLAY := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_NO_KERNEL := false
-TARGET_NO_RADIOIMAGE := true
-TARGET_NO_RPC := true
 
-# Enables CSVT
-TARGET_USES_CSVT := true
+LOCAL_PATH := device/motorola/cedric
 
-TARGET_CPU_ABI  := armeabi-v7a
+BOARD_VENDOR := motorola-qcom
+
+# AIDs and CAPS
+TARGET_FS_CONFIG_GEN := \
+    $(LOCAL_PATH)/fs_config/mot_aids.txt \
+    $(LOCAL_PATH)/fs_config/file_caps.txt
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8937
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno505
+
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8937
+TARGET_NO_BOOTLOADER := true
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 
-TARGET_HARDWARE_3D := false
-TARGET_BOARD_PLATFORM := msm8937
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
 
-BOARD_KERNEL_BASE        := 0x80000000
-BOARD_KERNEL_PAGESIZE    := 2048
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
-TARGET_USES_UNCOMPRESSED_KERNEL := false
-USE_CLANG_PLATFORM_BUILD := true
+# Asserts
+TARGET_OTA_ASSERT_DEVICE := cedric,cedric_retail
 
-# Shader cache config options
-# Maximum size of the  GLES Shaders that can be cached for reuse.
-# Increase the size if shaders of size greater than 12KB are used.
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
+# Kernel
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237
+BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 vmalloc=350M androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_LZ4C_DT := true
+TARGET_CUSTOM_DTBTOOL := dtbTool_custom
+BOARD_DTBTOOL_ARGS := --force-v3 --motorola 1
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_CONFIG := cedric_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola/msm8937
 
-# Maximum GLES shader cache size for each app to store the compiled shader
-# binaries. Decrease the size if RAM or Flash Storage size is a limitation
-# of the device.
-MAX_EGL_CACHE_SIZE := 2048*1024
+# Audio
+AUDIO_FEATURE_ENABLED_ALAC_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_APE_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
+AUDIO_FEATURE_ENABLED_AUDIOSPHERE := true
+AUDIO_FEATURE_ENABLED_ANC_HEADSET := true
+AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
+AUDIO_FEATURE_ENABLED_DEV_ARBI := true
+AUDIO_FEATURE_ENABLED_EXT_HDMI := true
+AUDIO_FEATURE_ENABLED_EXTN_FLAC_DECODER := true
+AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
+AUDIO_FEATURE_ENABLED_FLAC_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_FLUENCE := true
+AUDIO_FEATURE_ENABLED_HFP := true
+AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
+AUDIO_FEATURE_ENABLED_HIFI_AUDIO := true
+AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
+AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_PCM_OFFLOAD_24 := true
+AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
+AUDIO_FEATURE_ENABLED_SOURCE_TRACKING := true
+AUDIO_FEATURE_ENABLED_SSR := true
+AUDIO_FEATURE_ENABLED_VBAT_MONITOR := true
+AUDIO_FEATURE_ENABLED_VORBIS_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
+AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
+AUDIO_FEATURE_ENABLED_SND_MONITOR := true
+BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_GENERIC_AUDIO := true
+TARGET_USES_QCOM_MM_AUDIO := true
 
-ifeq ($(ENABLE_AB), true)
-# A/B related defines
-AB_OTA_UPDATER := true
-# Full A/B partiton update set
-# AB_OTA_PARTITIONS := xbl rpm tz hyp pmic modem abl boot keymaster cmnlib cmnlib64 system bluetooth
-# Subset A/B partitions for Android-only image update
-AB_OTA_PARTITIONS ?= boot system
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-TARGET_NO_RECOVERY := true
-BOARD_USES_RECOVERY_AS_BOOT := true
-else
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
-endif
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_QCOM := true
+QCOM_BT_READ_ADDR_FROM_PROP := true
 
-ifeq ($(ENABLE_AB),true)
-  ifeq ($(ENABLE_VENDOR_IMAGE), true)
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8937_32/recovery_AB_split_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8937_32/recovery_AB_non-split_variant.fstab
-  endif
-else
-  ifeq ($(ENABLE_VENDOR_IMAGE), true)
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8937_32/recovery_non-AB_split_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8937_32/recovery_non-AB_non-split_variant.fstab
-  endif
-endif
+# Camera
+TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
+USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_USES_NON_TREBLE_CAMERA := true
+
+# Charger
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_NO_CHARGER_LED := true
+
+# CNE / DPM
+BOARD_USES_QCNE := true
+
+# CPUsets
+ENABLE_CPUSETS := true
+
+# Crypto
+TARGET_HW_DISK_ENCRYPTION := true
+
+# Display
+BOARD_USES_ADRENO := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_GRALLOC1 := true
+TARGET_USES_ION := true
+TARGET_USES_HWC2 := true
+TARGET_USES_OVERLAY := true
+USE_OPENGL_RENDERER := true
+
+# FM
+BOARD_HAVE_QCOM_FM := true
+
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_cedric
+TARGET_RECOVERY_DEVICE_MODULES := libinit_cedric
+
+# Keymaster
+TARGET_PROVIDES_KEYMASTER := true
+
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
+# Media
+TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216        #    16384 * 1024 mmcblk0p37
 BOARD_CACHEIMAGE_PARTITION_SIZE := 260014080      #   253920 * 1024 mmcblk0p52
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432    #    16484 * 1024 mmcblk0p38
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16879616    #    16484 * 1024 mmcblk0p38
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3455451136    #  3428080 * 1024 mmcblk0p53
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 26401026048 # 25782252 * 1024 mmcblk0p54
 
-ifeq ($(ENABLE_VENDOR_IMAGE), true)
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_VENDOR := vendor
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-endif
-
-#TARGET_USES_AOSP := true
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlycon=msm_hsl_uart,0x78B0000
-
-BOARD_SECCOMP_POLICY := device/qcom/msm8937_32/seccomp
-
-BOARD_EGL_CFG := device/qcom/msm8937_32/egl.cfg
-
-
-# Enable suspend during charger mode
-BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
-
-# Added to indicate that protobuf-c is supported in this build
-PROTOBUF_SUPPORTED := false
-TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
-TARGET_USES_QCOM_DISPLAY_BSP := true
-TARGET_USES_HWC2 := true
-TARGET_USES_GRALLOC1 := true
-TARGET_USES_COLOR_METADATA := true
-
-#TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_msm
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-
-#Add support for firmare upgrade on msm8937
-HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
-
-#add suffix variable to uniquely identify the board
-TARGET_BOARD_SUFFIX := _32
-
-#Use dlmalloc instead of jemalloc for mallocs
-#MALLOC_IMPL := dlmalloc
-MALLOC_SVELTE := true
-
-#Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := true
-
-TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
-
-#Enable SSC Feature
-TARGET_USES_SSC := true
-
-#PCI RCS
-TARGET_USES_PCI_RCS := false
-
-# Enable sensor multi HAL
-USE_SENSOR_MULTI_HAL := true
-
-#Enable peripheral manager
+# Peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
+# Power
+TARGET_POWERHAL_VARIANT := qcom
 
-DEX_PREOPT_DEFAULT := nostripping
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QC_TIME_SERVICES := true
 
-# Enable dex pre-opt to speed up initial boot
-ifneq ($(TARGET_USES_AOSP),true)
-  ifeq ($(HOST_OS),linux)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-      WITH_DEXPREOPT_PIC := true
-      ifneq ($(TARGET_BUILD_VARIANT),user)
-        # Retain classes.dex in APK's for non-user builds
-        DEX_PREOPT_DEFAULT := nostripping
-      endif
-    endif
-  endif
-endif
+# Recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+LZMA_RAMDISK_TARGETS := recovery
 
-FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
+# SELinux
+include device/qcom/sepolicy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += device/motorola/cedric/sepolicy
 
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
+# Wifi
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_HAS_QCOM_WLAN_SDK          := true
+BOARD_WLAN_DEVICE                := qcwcn
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_AP           := "ap"
+WIFI_DRIVER_FW_PATH_STA          := "sta"
+WIFI_DRIVER_FW_PATH_P2P          := "p2p"
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
