@@ -16,33 +16,14 @@
 LOCAL_PATH := $(call my-dir)
 
 #----------------------------------------------------------------------
-# Compile (L)ittle (K)ernel bootloader and the nandwrite utility
-#----------------------------------------------------------------------
-ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true)
-
-# Compile
-include bootable/bootloader/lk/AndroidBoot.mk
-
-$(INSTALLED_BOOTLOADER_MODULE): $(TARGET_EMMC_BOOTLOADER) | $(ACP)
-	$(transform-prebuilt-to-target)
-$(BUILT_TARGET_FILES_PACKAGE): $(INSTALLED_BOOTLOADER_MODULE)
-
-droidcore: $(INSTALLED_BOOTLOADER_MODULE)
-endif
-
-#----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
 ifeq ($(KERNEL_DEFCONFIG),)
-   ifeq ($(TARGET_BUILD_VARIANT),user)
-      KERNEL_DEFCONFIG := msm8937-perf_defconfig
-   else
-      KERNEL_DEFCONFIG := msm8937_defconfig
-   endif
+     KERNEL_DEFCONFIG := cedric_defconfig
 endif
 
 ifeq ($(TARGET_KERNEL_SOURCE),)
-     TARGET_KERNEL_SOURCE := kernel
+     TARGET_KERNEL_SOURCE := kernel/motorola/msm8937
 endif
 
 include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
@@ -176,14 +157,6 @@ LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/hostapd
 LOCAL_SRC_FILES    := hostapd.deny
 include $(BUILD_PREBUILT)
 
-#Create symbolic links
-$(shell mkdir -p $(TARGET_OUT_VENDOR)/firmware/wlan/prima; \
-        ln -sf /persist/WCNSS_qcom_wlan_nv.bin \
-	$(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin; \
-        ln -sf /persist/WCNSS_wlan_dictionary.dat \
-	$(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat; \
-        ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
-	$(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
 endif
 
 #----------------------------------------------------------------------
