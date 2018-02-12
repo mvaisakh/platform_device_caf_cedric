@@ -6,7 +6,7 @@ ifeq ($(TARGET_USES_AOSP),true)
 TARGET_DISABLE_DASH := true
 endif
 
-DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8937_32/overlay
+DEVICE_PACKAGE_OVERLAYS := device/motorola/cedric/overlay
 # Default vendor configuration.
 ifeq ($(ENABLE_VENDOR_IMAGE),)
 ENABLE_VENDOR_IMAGE := true
@@ -18,8 +18,6 @@ ifeq ($(ENABLE_VENDOR_IMAGE), true)
 endif
 
 BOARD_HAVE_QCOM_FM := true
-# Default A/B configuration.
-ENABLE_AB ?= false
 
 TARGET_USES_NQ_NFC := true
 TARGET_KERNEL_VERSION := 3.18
@@ -33,22 +31,22 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 
 # media_profiles and media_codecs xmls for msm8937
 ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
-PRODUCT_COPY_FILES += device/qcom/msm8937_32/media/media_profiles_8937.xml:system/etc/media_profiles.xml \
-                      device/qcom/msm8937_32/media/media_profiles_8937.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
-                      device/qcom/msm8937_32/media/media_profiles_8956.xml:system/etc/media_profiles_8956.xml \
-                      device/qcom/msm8937_32/media/media_profiles_8956.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_8956.xml \
-                      device/qcom/msm8937_32/media/media_codecs_8937.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-                      device/qcom/msm8937_32/media/media_codecs_8956.xml::$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_8956.xml \
-                      device/qcom/msm8937_32/media/media_codecs_performance_8937.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-                      device/qcom/msm8937_32/media/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml
+PRODUCT_COPY_FILES += device/motorola/cedric/media/media_profiles_8937.xml:system/etc/media_profiles.xml \
+                      device/motorola/cedric/media/media_profiles_8937.xml:system/etc/media_profiles_vendor.xml \
+                      device/motorola/cedric/media/media_profiles_8956.xml:system/etc/media_profiles_8956.xml \
+                      device/motorola/cedric/media/media_profiles_8956.xml:system/etc/media_profiles_8956.xml \
+                      device/motorola/cedric/media/media_codecs_8937.xml:system/etc/media_codecs.xml \
+                      device/motorola/cedric/media/media_codecs_8956.xml::system/etc/media_codecs_8956.xml \
+                      device/motorola/cedric/media/media_codecs_performance_8937.xml:system/etc/media_codecs_performance.xml \
+                      device/motorola/cedric/media/media_codecs_vendor_audio.xml:system/etc/media_codecs_vendor_audio.xml
 endif
 # video seccomp policy files
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8937_32/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    device/qcom/msm8937_32/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+    device/motorola/cedric/seccomp/mediacodec-seccomp.policy:system/etc/seccomp_policy/mediacodec.policy \
+    device/motorola/cedric/seccomp/mediaextractor-seccomp.policy:system/etc/seccomp_policy/mediaextractor.policy
 
-PRODUCT_COPY_FILES += device/qcom/msm8937_32/whitelistedapps.xml:system/etc/whitelistedapps.xml \
-                      device/qcom/msm8937_32/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
+PRODUCT_COPY_FILES += device/motorola/cedric/whitelistedapps.xml:system/etc/whitelistedapps.xml \
+                      device/motorola/cedric/gamedwhitelist.xml:system/etc/gamedwhitelist.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.vidc.disable.split.mode=1
@@ -59,22 +57,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common.mk)
 
-PRODUCT_NAME := msm8937_32
-PRODUCT_DEVICE := msm8937_32
-
-# When can normal compile this module, need module owner enable below commands
-# font rendering engine feature switch
-#-include $(QCPATH)/common/config/rendering-engine.mk
-#ifneq (,$(strip $(wildcard $(PRODUCT_RENDERING_ENGINE_REVLIB))))
-#    MULTI_LANG_ENGINE := REVERIE
-#   MULTI_LANG_ZAWGYI := REVERIE
-#endif
+PRODUCT_NAME := cedric
+PRODUCT_DEVICE := cedric
 
 #PRODUCT_BOOT_JARS += vcard \
                      com.qti.dpmframework
 PRODUCT_BOOT_JARS += qcom.fmradio
 
-DEVICE_MANIFEST_FILE := device/qcom/msm8937_32/manifest.xml
+DEVICE_MANIFEST_FILE := device/motorola/cedric/manifest.xml
 DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
 
 ifneq ($(strip $(QCPATH)),)
@@ -115,20 +105,20 @@ PRODUCT_PACKAGES += \
 
 # Feature definition files for msm8937
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
-    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:systemetc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+    frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 PRODUCT_COPY_FILES += \
-        frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
+        frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
 
 # MotoActions
 PRODUCT_PACKAGES += \
@@ -146,13 +136,13 @@ PRODUCT_PACKAGES += wcnss_service
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8937_32/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
+    device/motorola/cedric/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
 #wlan driver
 PRODUCT_COPY_FILES += \
-    device/qcom/msm8937_32/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
-    device/qcom/msm8937_32/WCNSS_qcom_wlan_nv.bin:persist/WCNSS_qcom_wlan_nv.bin \
-    device/qcom/msm8937_32/WCNSS_wlan_dictionary.dat:persist/WCNSS_wlan_dictionary.dat
+    device/motorola/cedric/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    device/motorola/cedric/WCNSS_qcom_wlan_nv.bin:persist/WCNSS_qcom_wlan_nv.bin \
+    device/motorola/cedric/WCNSS_wlan_dictionary.dat:persist/WCNSS_wlan_dictionary.dat
 
 ifneq ($(TARGET_DISABLE_DASH), true)
     PRODUCT_BOOT_JARS += qcmediaplayer
@@ -175,18 +165,9 @@ PRODUCT_BOOT_JARS += telephony-ext
 PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN ta_IN te_IN zh_HK \
         in_ID my_MM km_KH sw_KE uk_UA pl_PL sr_RS sl_SI fa_IR kn_IN ml_IN ur_IN gu_IN or_IN
 
-
-# When can normal compile this module,  need module owner enable below commands
-# Add the overlay path
-#PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
-#        $(QCPATH)/qrdplus/globalization/multi-language/res-overlay \
-#        $(PRODUCT_PACKAGE_OVERLAYS)
-#PRODUCT_PACKAGE_OVERLAYS := $(QCPATH)/qrdplus/Extension/res \
-        $(PRODUCT_PACKAGE_OVERLAYS)
-
 # Powerhint configuration file
 PRODUCT_COPY_FILES += \
-     device/qcom/msm8937_32/powerhint.xml:system/etc/powerhint.xml
+     device/motorola/cedric/powerhint.xml:system/etc/powerhint.xml
 
 #Healthd packages
 PRODUCT_PACKAGES += android.hardware.health@1.0-impl \
@@ -198,15 +179,13 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
-
-
 #for android_filesystem_config.h
 PRODUCT_PACKAGES += \
     fs_config_files
 
 # Sensor HAL conf file
 PRODUCT_COPY_FILES += \
-     device/qcom/msm8937_32/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+     device/motorola/cedric/sensors/hals.conf:system/etc/sensors/hals.conf
 
 # Vibrator
 PRODUCT_PACKAGES += \
@@ -279,19 +258,6 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
-ifeq ($(TARGET_HAS_LOW_RAM), true)
-PRODUCT_PROPERTY_OVERRIDES += persist.radio.multisim.config=ssss
-endif
-
-ifeq ($(ENABLE_AB),true)
-#A/B related packages
-PRODUCT_PACKAGES += update_engine \
-                   update_engine_client \
-                   update_verifier \
-                   bootctrl.msm8937 \
-                   brillo_update_payload \
-                   android.hardware.boot@1.0-impl \
-                   android.hardware.boot@1.0-service
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
 endif
