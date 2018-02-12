@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/msm8937_32.mk
+	$(LOCAL_DIR)/cedric.mk
