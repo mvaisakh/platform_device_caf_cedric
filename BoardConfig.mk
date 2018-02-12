@@ -83,7 +83,7 @@ ENABLE_CPUSETS := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-
+TARGET_CRYPTFS_HW_PATH := device/motorola/cedric/cryptfs_hw
 
 # Display
 BOARD_USES_ADRENO := true
