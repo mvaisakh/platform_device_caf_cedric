@@ -5,17 +5,7 @@
 #rild.libpath=/system/lib/libreference-ril.so
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
-persist.rild.nitz_plmn=
-persist.rild.nitz_long_ons_0=
-persist.rild.nitz_long_ons_1=
-persist.rild.nitz_long_ons_2=
-persist.rild.nitz_long_ons_3=
-persist.rild.nitz_short_ons_0=
-persist.rild.nitz_short_ons_1=
-persist.rild.nitz_short_ons_2=
-persist.rild.nitz_short_ons_3=
-ril.subscription.types=NV,RUIM
-DEVICE_PROVISIONED=1
+
 #
 # Set network mode to (T/L/G/W/1X/EVDO, T/G/W/L) for 7+5 mode device on DSDS mode
 #
@@ -29,13 +19,9 @@ persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.logs=0
 dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
-persist.demo.hdmirotationlock=false
 debug.enable.sglscale=1
 sdm.debug.disable_skip_validate=1
 debug.sf.recomputecrop=0
-
-#ro.hdmi.enable=true
-#tunnel.decode=true
 
 #
 # system props for the cne module
@@ -76,7 +62,7 @@ persist.timed.enable=true
 # 131072 is decimal for 0x20000 to report version 2
 # 196608 is decimal for 0x30000 to report major/minor versions as 3/0
 # 196609 is decimal for 0x30001 to report major/minor versions as 3/1
-#ro.opengles.version=196609
+
 
 # System property for cabl
 ro.qualcomm.cabl=2
@@ -120,17 +106,11 @@ persist.console.silent.config=1
 ro.vendor.at_library=libqti-at.so
 ro.vendor.gt_library=libqti-gt.so
 
-#property for game detection feature
-debug.enable.gamed=0
 #property to enable narrow search range for video encoding
 vendor.vidc.enc.narrow.searchrange=1
 
 #property to enable fingerprint
 persist.qfp=false
-
-#min/max cpu in core control
-ro.vendor.qti.core_ctl_min_cpu=2
-ro.vendor.qti.core_ctl_max_cpu=4
 
 #HWUI properties
 ro.hwui.texture_cache_size=72
@@ -163,21 +143,6 @@ ro.vendor.qti.am.reschedule_service=true
 # Create zram disk
 ro.vendor.qti.config.zram=true
 
-# Create Swap disk, if below sys-prop enabled & also if device has lower (< 1 GB) RAM
-ro.vendor.qti.config.swap=true
-
-# set cutoff voltage to 3200mV
-ro.cutoff_voltage_mv=3200
-
-#set device emmc size
-ro.emmc_size=16GB
-
-#force HAL1 for below packages
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk
-
 #properties for limiting preview size in camera
 persist.vendor.camera.display.umax=1920x1080
 persist.vendor.camera.display.lmax=1280x720
-
-#set cutoff voltage to 3400mV
-ro.cutoff_voltage_mv=3400
