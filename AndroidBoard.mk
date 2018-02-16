@@ -36,43 +36,10 @@ $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 #----------------------------------------------------------------------
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := synaptics_rmi4_i2c.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := synaptics_dsx.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := ft5x06_ts.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := qpnp_pon.kl
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
-include $(BUILD_PREBUILT)
-
-ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
-include $(CLEAR_VARS)
 LOCAL_MODULE       := wpa_supplicant_overlay.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
+LOCAL_SRC_FILES    := wifi/$(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
 include $(BUILD_PREBUILT)
 
@@ -80,7 +47,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := p2p_supplicant_overlay.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := $(LOCAL_MODULE)
+LOCAL_SRC_FILES    := wifi/$(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
 include $(BUILD_PREBUILT)
 
