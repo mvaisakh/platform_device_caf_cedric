@@ -42,7 +42,7 @@ PRODUCT_DEVICE := cedric
 PRODUCT_BOOT_JARS += qcom.fmradio
 
 DEVICE_MANIFEST_FILE := device/motorola/cedric/manifest.xml
-DEVICE_MATRIX_FILE   := device/qcom/common/compatibility_matrix.xml
+DEVICE_MATRIX_FILE   := device/motorola/cedric/compatibility_matrix.xml
 
 ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += WfdCommon
