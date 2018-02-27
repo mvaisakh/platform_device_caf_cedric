@@ -190,6 +190,11 @@ PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
 PRODUCT_COPY_FILES += device/motorola/cedric/configs/thermal/thermal-engine-cedric-India.conf:system/etc/thermal-engine-cedric-India.conf \
 	    	      device/motorola/cedric/configs/thermal/thermal-engine-cedric.conf:system/etc/thermal-engine-cedric.conf \
 		      device/motorola/cedric/configs/thermal/thermal-engine-montana.conf:system/etc/thermal-engine-montana.conf
+#DSI
+PRODUCT_COPY_FILES += device/motorola/cedric/configs/dsi_config.xml:system/etc/data/dsi_config.xml
+
+#netmgr
+PRODUCT_COPY_FILES += device/motorola/cedric/configs/netmgr_config.xml:system/etc/data/netmgr_config.xml
 
 TARGET_SUPPORT_SOTER := true
 
