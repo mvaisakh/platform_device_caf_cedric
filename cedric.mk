@@ -196,6 +196,9 @@ PRODUCT_COPY_FILES += device/motorola/cedric/configs/dsi_config.xml:system/etc/d
 #netmgr
 PRODUCT_COPY_FILES += device/motorola/cedric/configs/netmgr_config.xml:system/etc/data/netmgr_config.xml
 
+#RIDL qdss
+PRODUCT_COPY_FILES += device/motorola/cedric/configs/RIDL/qdss.cfg:system/vendor/etc/RIDL/qdss.cfg
+
 TARGET_SUPPORT_SOTER := true
 
 #Enable AOSP KEYMASTER and GATEKEEPER HIDLs
