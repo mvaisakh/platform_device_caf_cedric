@@ -105,7 +105,7 @@ PRODUCT_PACKAGES += wcnss_service
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/motorola/cedric/configs/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
+    device/motorola/cedric/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
 
 #wlan driver
 PRODUCT_COPY_FILES += \
