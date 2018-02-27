@@ -41,8 +41,8 @@ PRODUCT_DEVICE := cedric
 
 PRODUCT_BOOT_JARS += qcom.fmradio
 
-DEVICE_MANIFEST_FILE := device/motorola/cedric/manifest.xml
-DEVICE_MATRIX_FILE   := device/motorola/cedric/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := device/motorola/cedric/configs/manifest.xml
+DEVICE_MATRIX_FILE   := device/motorola/cedric/configs/compatibility_matrix.xml
 
 ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += WfdCommon
@@ -105,7 +105,7 @@ PRODUCT_PACKAGES += wcnss_service
 
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
-    device/motorola/cedric/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
+    device/motorola/cedric/configs/msm_irqbalance.conf:system/etc/msm_irqbalance.conf
 
 #wlan driver
 PRODUCT_COPY_FILES += \
