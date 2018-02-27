@@ -187,6 +187,10 @@ PRODUCT_PACKAGES += android.hardware.light@2.0-impl
 PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
                     android.hardware.thermal@1.0-service
 
+PRODUCT_COPY_FILES += device/motorola/cedric/configs/thermal/thermal-engine-cedric-India.conf:system/etc/thermal-engine-cedric-India.conf \
+	    	      device/motorola/cedric/configs/thermal/thermal-engine-cedric.conf:system/etc/thermal-engine-cedric.conf \
+		      device/motorola/cedric/configs/thermal/thermal-engine-montana.conf:system/etc/thermal-engine-montana.conf
+
 TARGET_SUPPORT_SOTER := true
 
 #Enable AOSP KEYMASTER and GATEKEEPER HIDLs
