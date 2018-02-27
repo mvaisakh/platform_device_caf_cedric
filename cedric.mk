@@ -103,6 +103,18 @@ PRODUCT_PACKAGES += fstab.qcom
 
 PRODUCT_PACKAGES += wcnss_service
 
+# Keylayouts
+PRODUCT_COPY_FILES += \
+    device/motorola/cedric/keylayout/ft5x06_ts.kl:system/usr/keylayout/ft5x06_ts.kl \
+    device/motorola/cedric/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    device/motorola/cedric/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
+    device/motorola/cedric/keylayout/synaptics_dsxv26.kl:system/usr/keylayout/synaptics_dsxv26.kl \
+    device/motorola/cedric/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl \
+    device/motorola/cedric/keylayout/uinput/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl
+
+# IDC
+PRODUCT_COPY_FILES += device/motorola/cedric/keylayout/uinput/uinput-fpc.idc:system/usr/idc/uinput-fpc.idc
+
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += \
     device/motorola/cedric/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf
