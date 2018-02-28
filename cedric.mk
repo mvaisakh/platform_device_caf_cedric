@@ -49,6 +49,33 @@ ifneq ($(strip $(QCPATH)),)
     PRODUCT_BOOT_JARS += tcmiface
 endif
 
+# Hardware
+
+## Audio
+AUDIO_HARDWARE += audio.primary.msm8937
+AUDIO_POLICY += audio_policy.msm8937
+
+## Camera
+LIBCAMERA += camera.msm8937
+
+## Copybit
+LIBCOPYBIT += copybit.msm8937
+
+## Gralloc
+LIBGRALLOC += gralloc.msm8937
+
+## Memtrack
+LIBMEMTRACK += memtrack.msm8937
+
+## Lights
+LIBLIGHTS += lights.msm8937
+
+## HWComposer
+LIBHWCOMPOSER += hwcomposer.msm8937
+
+## Thermal
+THERMAL_HAL += thermal.msm8937
+
 # Audio configuration file
 -include $(TOPDIR)hardware/qcom/audio/configs/msm8937/msm8937.mk
 
