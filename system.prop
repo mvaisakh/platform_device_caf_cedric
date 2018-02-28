@@ -9,7 +9,7 @@ rild.libargs=-d /dev/smd0
 #
 # Set network mode to (T/L/G/W/1X/EVDO, T/G/W/L) for 7+5 mode device on DSDS mode
 #
-ro.telephony.default_network=22,20
+#ro.telephony.default_network=22,20
 
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
@@ -22,6 +22,15 @@ dev.pm.dyn_samplingrate=1
 debug.enable.sglscale=1
 sdm.debug.disable_skip_validate=1
 debug.sf.recomputecrop=0
+
+#
+# system props for the camera
+#
+# preferred IS type for 8937 is IS_TYPE_DIS i.e, 1
+# IS_TYPE_NONE=0, IS_TYPE_DIS=1, IS_TYPE_GA_DIS=2, IS_TYPE_EIS_1_0=3, IS_TYPE_EIS_2_0=4 IS_TYPE_MAX=5
+#
+persist.camera.is_type=1
+persist.camera.gyro.android=1
 
 #
 # system props for the cne module
@@ -84,9 +93,59 @@ bluetooth.hfp.client=1
 persist.fuse_sdcard=true
 
 #
+#snapdragon value add features
+#
+ro.qc.sdk.audio.ssr=false
+##fluencetype can be "fluence" or "fluencepro" or "none"
+ro.qc.sdk.audio.fluencetype=none
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=true
+#Set for msm8937
+tunnel.audio.encode = false
+#Buffer size in kbytes for compress offload playback
+audio.offload.buffer.size.kb=64
+#Minimum duration for offload playback in secs
+audio.offload.min.duration.secs=30
+#Enable offload audio video playback by default
+audio.offload.video=true
+
+#Enable PCM offload by default
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
+
+#Enable audio track offload by default
+audio.offload.track.enable=true
+
+#Enable music through deep buffer
+audio.deep_buffer.media=true
+
+#disable voice path for PCM VoIP by default
+use.voice.path.for.pcm.voip=false
+ro.config.vc_call_vol_steps=8
+
+#enable downsampling for multi-channel content > 48Khz
+audio.playback.mch.downsample=true
+
+#
 #System property for FM transmitter
 #
 ro.fm.transmitter=false
+
+#enable dsp gapless mode by default
+audio.offload.gapless.enabled=true
+
+#multi offload
+audio.offload.multiple.enabled=false
+
+#enable software decoders for ALAC and APE.
+use.qti.sw.alac.decoder=true
+use.qti.sw.ape.decoder=true
+
+#enable pbe effects
+audio.safx.pbe.enabled=true
+#property for AudioSphere Post processing
+audio.pp.asphere.enabled=false
 
 # set max background services
 ro.config.max_starting_bg=8
@@ -112,6 +171,12 @@ vendor.vidc.enc.narrow.searchrange=1
 #property to enable fingerprint
 persist.qfp=false
 
+#property to enable DS2 dap
+audio.dolby.ds2.enabled=true
+#min/max cpu in core control
+ro.core_ctl_min_cpu=2
+ro.core_ctl_max_cpu=4
+
 #HWUI properties
 ro.hwui.texture_cache_size=72
 ro.hwui.layer_cache_size=48
@@ -126,23 +191,32 @@ ro.hwui.text_large_cache_width=2048
 ro.hwui.text_large_cache_height=2048
 
 #Enable B service adj transition by default
-ro.vendor.qti.sys.fw.bservice_enable=true
-ro.vendor.qti.sys.fw.bservice_limit=5
-ro.vendor.qti.sys.fw.bservice_age=5000
+ro.sys.fw.bservice_enable=true
+ro.sys.fw.bservice_limit=5
+ro.sys.fw.bservice_age=5000
 
 #Trim properties
-ro.vendor.qti.sys.fw.use_trim_settings=true
-ro.vendor.qti.sys.fw.empty_app_percent=50
-ro.vendor.qti.sys.fw.trim_empty_percent=100
-ro.vendor.qti.sys.fw.trim_cache_percent=100
-ro.vendor.qti.sys.fw.trim_enable_memory=2147483648
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.empty_app_percent=50
+ro.sys.fw.trim_empty_percent=100
+ro.sys.fw.trim_cache_percent=100
+ro.sys.fw.trim_enable_memory=2147483648
 
 # Enable Delay Service Restart
-ro.vendor.qti.am.reschedule_service=true
+ro.am.reschedule_service=true
+
+#Optimal dex2oat threads for faster app installation
+ro.sys.fw.dex2oat_thread_count=4
 
 # Create zram disk
-ro.vendor.qti.config.zram=true
+ro.config.zram=true
+
+# set cutoff voltage to 3200mV
+ro.cutoff_voltage_mv=3200
 
 #properties for limiting preview size in camera
-persist.vendor.camera.display.umax=1920x1080
-persist.vendor.camera.display.lmax=1280x720
+camera.display.umax=1920x1080
+camera.display.lmax=1280x720
+
+#set cutoff voltage to 3400mV
+ro.cutoff_voltage_mv=3400
