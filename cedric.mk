@@ -11,20 +11,8 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 
 -include $(QCPATH)/common/config/qtic-config.mk
 
-# media_profiles and media_codecs xmls for msm8937
-PRODUCT_COPY_FILES += device/motorola/cedric/media/media_profiles_8937.xml:system/etc/media_profiles.xml \
-                      device/motorola/cedric/media/media_profiles_8937.xml:system/etc/media_profiles_vendor.xml \
-                      device/motorola/cedric/media/media_profiles_8956.xml:system/etc/media_profiles_8956.xml \
-                      device/motorola/cedric/media/media_profiles_8956.xml:system/etc/media_profiles_8956.xml \
-                      device/motorola/cedric/media/media_codecs_8937.xml:system/etc/media_codecs.xml \
-                      device/motorola/cedric/media/media_codecs_8956.xml::system/etc/media_codecs_8956.xml \
-                      device/motorola/cedric/media/media_codecs_performance_8937.xml:system/etc/media_codecs_performance.xml \
-                      device/motorola/cedric/media/media_codecs_vendor_audio.xml:system/etc/media_codecs_vendor_audio.xml
-
-# video seccomp policy files
-PRODUCT_COPY_FILES += \
-    device/motorola/cedric/seccomp/mediacodec-seccomp.policy:system/etc/seccomp_policy/mediacodec.policy \
-    device/motorola/cedric/seccomp/mediaextractor-seccomp.policy:system/etc/seccomp_policy/mediaextractor.policy
+# Media
+include device/motorola/cedric/media.mk
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.vidc.disable.split.mode=1
@@ -249,13 +237,9 @@ PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-impl \
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
 # VHW
-PRODUCT_COPY_FILES := device/motorola/cedric/configs/vhw.xml
+PRODUCT_COPY_FILES := device/motorola/cedric/configs/vhw.xml:system/etc/vhw.xml
 
 PRODUCT_COPY_FILES := \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml\
-    frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml\
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \

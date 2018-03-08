@@ -143,10 +143,6 @@ ifeq ($(BOARD_USES_MOT_SENSOR_HUB), true)
 
         endif
 
-        ifeq ($(MOT_SENSOR_HUB_HW_TYPE_L4), true)
-            LOCAL_REQUIRED_MODULES += sensors.iio
-        endif
-
         ifeq ($(MOT_AP_SENSOR_HW_REARPROX), true)
             LOCAL_SRC_FILES += \
                 $(SH_PATH)/RearProxSensor.cpp \
@@ -295,18 +291,6 @@ ifeq ($(BOARD_USES_MOT_SENSOR_HUB), true)
         motosh_bin/motosh.cpp \
         motosh_bin/CRC32.c
     LOCAL_REQUIRED_MODULES += sensorhub-blacklist.txt
-
-    ifeq ($(MOT_SENSOR_HUB_HW_TYPE_L4), true)
-        ifneq ($(TARGET_BUILD_VARIANT),user)
-            # Build libiio.so
-            LOCAL_REQUIRED_MODULES += libiio
-
-            # Build libiio tests/utilities
-            LOCAL_REQUIRED_MODULES += iio_genxml iio_info iio_readdev iio_reg
-            # Build the kernel provided IIO Utilities
-            #LOCAL_REQUIRED_MODULES += generic_buffer lsiio iio_event_monitor
-        endif
-    endif
 
     LOCAL_C_INCLUDES := \
         $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
