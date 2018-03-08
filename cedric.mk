@@ -248,6 +248,9 @@ PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-impl \
 
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
+# VHW
+PRODUCT_COPY_FILES := device/motorola/cedric/configs/vhw.xml
+
 PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
