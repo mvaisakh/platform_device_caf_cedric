@@ -14,17 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
--include vendor/motorola/cedric/BoardConfigVendor.mk
 -include $(QCPATH)/common/msm8937_32/BoardConfigVendor.mk
 
 LOCAL_PATH := device/motorola/cedric
 
 BOARD_VENDOR := motorola-qcom
-
-# AIDs and CAPS
-TARGET_FS_CONFIG_GEN := \
-    $(LOCAL_PATH)/fs_config/mot_aids.txt \
-    $(LOCAL_PATH)/fs_config/file_caps.txt
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8937
@@ -139,8 +133,8 @@ TARGET_USERIMAGES_USE_F2FS := true
 LZMA_RAMDISK_TARGETS := recovery
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/motorola/cedric/sepolicy
+include device/qcom/sepolicy/Android.mk
+BOARD_SEPOLICY_DIRS += device/qcom/sepolicy/msm8937
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
