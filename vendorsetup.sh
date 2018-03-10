@@ -1,3 +1,3 @@
-add_lunch_combo poly_cedric-userdebug
-add_lunch_combo poly_cedric-user
-add_lunch_combo poly_cedric-eng
+add_lunch_combo aosp_cedric-userdebug
+add_lunch_combo aosp_cedric-user
+add_lunch_combo aosp_cedric-eng
