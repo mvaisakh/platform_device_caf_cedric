@@ -62,7 +62,7 @@ LIBHWCOMPOSER += hwcomposer.msm8937
 THERMAL_HAL += thermal.msm8937
 
 # Audio configuration file
-include $(TOPDIR)/hardware/qcom/audio/configs/msm8937/msm8937.mk
+-include $(TOPDIR)hardware/qcom/audio/configs/msm8937/msm8937.mk
 
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
@@ -88,7 +88,8 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service \
     android.hardware.configstore@1.0-service
 
-include $(TOPDIR)/hardware/qcom/display/common.mk
+-include $(TOPDIR)hardware/qcom/display/common.mk
+
 # Feature definition files for msm8937
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:systemetc/permissions/android.hardware.sensor.accelerometer.xml \
