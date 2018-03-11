@@ -14,17 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
--include vendor/motorola/cedric/BoardConfigVendor.mk
 -include $(QCPATH)/common/msm8937_32/BoardConfigVendor.mk
 
 LOCAL_PATH := device/motorola/cedric
 
 BOARD_VENDOR := motorola-qcom
-
-# AIDs and CAPS
-TARGET_FS_CONFIG_GEN := \
-    $(LOCAL_PATH)/fs_config/mot_aids.txt \
-    $(LOCAL_PATH)/fs_config/file_caps.txt
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8937
@@ -55,8 +49,6 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_LZ4C_DT := true
-TARGET_CUSTOM_DTBTOOL := dtbTool_custom
-BOARD_DTBTOOL_ARGS := --force-v3 --motorola 1
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_ARCH := arm
 
@@ -83,7 +75,7 @@ ENABLE_CPUSETS := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := device/motorola/cedric/cryptfs_hw
+TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 
 # Display
 BOARD_USES_ADRENO := true
@@ -139,8 +131,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 LZMA_RAMDISK_TARGETS := recovery
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/motorola/cedric/sepolicy
+include device/qcom/sepolicy/Android.mk
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true

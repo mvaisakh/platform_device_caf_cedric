@@ -24,9 +24,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common.mk)
 
-PRODUCT_NAME := cedric
-PRODUCT_DEVICE := cedric
-
 PRODUCT_BOOT_JARS += qcom.fmradio
 
 DEVICE_MANIFEST_FILE := device/motorola/cedric/configs/manifest.xml

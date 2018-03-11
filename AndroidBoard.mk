@@ -18,15 +18,8 @@ LOCAL_PATH := $(call my-dir)
 #----------------------------------------------------------------------
 # Compile Linux Kernel
 #----------------------------------------------------------------------
-ifeq ($(KERNEL_DEFCONFIG),)
-     KERNEL_DEFCONFIG := cedric_defconfig
-endif
-
-ifeq ($(TARGET_KERNEL_SOURCE),)
-     TARGET_KERNEL_SOURCE := kernel/motorola/msm8937
-endif
-
-include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
+TARGET_KERNEL_CONFIG := cedric_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola/msm8937
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	$(transform-prebuilt-to-target)
@@ -74,23 +67,6 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)/hostapd
 LOCAL_SRC_FILES    := wifi/hostapd.deny
 include $(BUILD_PREBUILT)
-
-endif
-
-#----------------------------------------------------------------------
-# Radio image
-#----------------------------------------------------------------------
-ifeq ($(ADD_RADIO_FILES), true)
-radio_dir := $(LOCAL_PATH)/radio
-RADIO_FILES := $(shell cd $(radio_dir) ; ls)
-$(foreach f, $(RADIO_FILES), \
-    $(call add-radio-file,radio/$(f)))
-endif
-
-#----------------------------------------------------------------------
-# extra images
-#----------------------------------------------------------------------
-include device/qcom/common/generate_extra_images.mk
 
 #----------------------------------------------------------------------
 # pick up additional files for Tiny Android builds
