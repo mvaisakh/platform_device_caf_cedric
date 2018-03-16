@@ -24,21 +24,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, device/qcom/common/common.mk)
 
-PRODUCT_BOOT_JARS += qcom.fmradio
-
 DEVICE_MANIFEST_FILE := device/motorola/cedric/configs/manifest.xml
 DEVICE_MATRIX_FILE   := device/motorola/cedric/configs/compatibility_matrix.xml
-
-ifneq ($(strip $(QCPATH)),)
-    PRODUCT_BOOT_JARS += WfdCommon
-    PRODUCT_BOOT_JARS += tcmiface
-endif
 
 # Hardware
 
 ## Audio
 AUDIO_HARDWARE += audio.primary.msm8937
-AUDIO_POLICY += audio_policy.msm8937
 
 ## Camera
 LIBCAMERA += camera.msm8937
@@ -60,9 +52,6 @@ LIBHWCOMPOSER += hwcomposer.msm8937
 
 ## Thermal
 THERMAL_HAL += thermal.msm8937
-
-# Audio configuration file
--include $(TOPDIR)hardware/qcom/audio/configs/msm8937/msm8937.mk
 
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
@@ -138,10 +127,6 @@ PRODUCT_COPY_FILES += \
     device/motorola/cedric/WCNSS_qcom_wlan_nv.bin:persist/WCNSS_qcom_wlan_nv.bin \
     device/motorola/cedric/WCNSS_wlan_dictionary.dat:persist/WCNSS_wlan_dictionary.dat
 
-ifneq ($(TARGET_DISABLE_DASH), true)
-    PRODUCT_BOOT_JARS += qcmediaplayer
-endif
-
 PRODUCT_PACKAGES += \
     wpa_supplicant_overlay.conf \
     p2p_supplicant_overlay.conf
@@ -152,7 +137,6 @@ PRODUCT_PACKAGES += \
     wifilogd
 
 PRODUCT_PACKAGES += telephony-ext
-PRODUCT_BOOT_JARS += telephony-ext
 
 # Defined the locales
 PRODUCT_LOCALES += th_TH vi_VN tl_PH hi_IN ar_EG ru_RU tr_TR pt_BR bn_IN mr_IN ta_IN te_IN zh_HK \
@@ -252,3 +236,9 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/vendor/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/vendor/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/vendor/etc/permissions/android.hardware.bluetooth_le.xml \
+
+# Dummy HIDL
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.manager@1.0
+
